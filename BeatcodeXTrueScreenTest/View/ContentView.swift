@@ -16,7 +16,7 @@ struct ContentView: View {
                 ForEach($viewModel.items) { $item in
                     
                     NavigationLink {
-                        ItemDetailView()
+                        ItemDetailView(item: $item)
                     } label: {
                         HStack {
                             

@@ -8,11 +8,27 @@
 import SwiftUI
 
 struct ItemDetailView: View {
+    @Binding var item: Item
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack{
+            Text(item.itemName)
+            
+            Button {
+                item.isFavorite.toggle()
+            } label: {
+                Image(systemName: item.isFavorite ? "heart.fill" : "heart")
+                    .resizable()
+                    .frame(width: 40, height: 40)
+                    .foregroundColor(item.isFavorite ? .red : .gray)
+            }
+            
+        }
     }
 }
 
+
+
 #Preview {
-    ItemDetailView()
+    ItemDetailView(item: .constant(Item(itemName: "cat", isFavorite: true)))
 }
+
