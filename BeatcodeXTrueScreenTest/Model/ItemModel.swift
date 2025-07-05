@@ -12,6 +12,9 @@ import SwiftUI
 struct Item: Identifiable {
     let id = UUID()
     let itemName: String
+    /*
+    for now I'll make the list work, I'll think about the Images later
     let itemImage: String
+     */
     var isFavorite: Bool = false
 }
