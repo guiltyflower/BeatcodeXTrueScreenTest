@@ -1,5 +1,5 @@
 //
-//  ItemViewModel.swift
+//  ItemsViewModel.swift
 //  BeatcodeXTrueScreenTest
 //
 //  Created by Giovanni Fioretto on 05/07/25.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ItemListViewModel: ObservableObject {
+class ItemsViewModel: ObservableObject {
     @Published var items: [Item]//published var to update the favourite status ion both views
     
     init() {

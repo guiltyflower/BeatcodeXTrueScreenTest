@@ -8,14 +8,31 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var viewModel = ItemsViewModel()
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationView {
+            List {
+                ForEach($viewModel.items) { $item in
+                    HStack {
+                        Text(item.itemName)
+                        
+                        Spacer()
+                        
+                        Button {
+                            item.isFavorite.toggle()
+                        } label: {
+                            Image(systemName: item.isFavorite ? "heart.fill" : "heart")
+                                .foregroundColor(item.isFavorite ? .red : .gray)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        //I use this modifier to remove the click effect on the whole list item
+                        
+                    }
+                }
+            }
+            .navigationTitle("Items")
         }
-        .padding()
     }
 }
 
