@@ -10,27 +10,36 @@ import SwiftUI
 struct ItemDetailView: View {
     @Binding var item: Item
     var body: some View {
-        VStack(spacing: 40){
+        ZStack(alignment: .topTrailing) {
+            VStack(spacing: 40) {
+                //eventual other item things (image ecc ecc)
+                Text("This is the description page for \(item.itemName)")
+                Spacer()
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            .padding(.top, 150)
             
-            Text("This is the description page for \(item.itemName)")
-          
+            //the button is floating to avoid hitting other objects in the view
             Button {
                 item.isFavorite.toggle()
             } label: {
                 Image(systemName: item.isFavorite ? "heart.fill" : "heart")
                     .resizable()
-                    .frame(width: 40, height: 40)
+                    .scaledToFit()
+                    .frame(width: 24, height: 24)
                     .foregroundColor(item.isFavorite ? .red : .gray)
+                    .padding(12)
+                    .background(
+                        Circle()
+                            .fill(Color(.white))
+                            .shadow(radius: 2)
+                    )
             }
-            
-     
-           
+            .padding(.top, 16)
+            .padding(.trailing, 16)
         }
-        .frame(maxWidth: .infinity,maxHeight: .infinity, alignment: .top)
-        .padding(.top, 40)
         .navigationTitle(item.itemName.uppercased())
         .navigationBarTitleDisplayMode(.inline)
-     
     }
 }
 
