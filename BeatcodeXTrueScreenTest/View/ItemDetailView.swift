@@ -35,6 +35,10 @@ struct ItemDetailView: View {
                             .shadow(radius: 2)
                     )
             }
+            .accessibilityRemoveTraits(.isButton)
+            .accessibilityHint(item.isFavorite ?
+                               "Favorite icon. This is a favorite item. Double tap to remove from favorites"
+                               : "Favorite icon, tap to add to favorites")
             .padding(.top, 16)
             .padding(.trailing, 16)
         }
