@@ -12,7 +12,7 @@ struct ItemDetailView: View {
     var body: some View {
         VStack{
             Text(item.itemName)
-            
+                .accessibilityLabel(item.itemName)
             Button {
                 item.isFavorite.toggle()
             } label: {

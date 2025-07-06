@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct ContentView: View {
     @StateObject private var viewModel = ItemsViewModel()
-
+    
     var body: some View {
         NavigationView {
             List {
@@ -21,7 +22,6 @@ struct ContentView: View {
                         HStack {
                             
                             Text(item.itemName)
-                            
                             Spacer()
                             
                             Button {
@@ -35,8 +35,24 @@ struct ContentView: View {
                             
                         }
                     }
+                    .accessibilityElement(children: .combine)
+                    .accessibilityHint("Double tap for the details")
+                    .accessibilityAction(named: Text(item.isFavorite
+                                                     ? "Remove from favorites"
+                                                     : "Add to favorites")
+                    ) {
+                        item.isFavorite.toggle()
+                        let message = item.isFavorite
+                        ? "\(item.itemName) added to favorites"
+                                : "\(item.itemName) Removed from favorites"
+                            UIAccessibility.post(notification: .announcement, argument: message)
+                    }
+                    .accessibilityAction(named: Text("Spell item name")) {
+                        let spelled = item.itemName.map { String($0) }.joined(separator: " ")
+                        UIAccessibility.post(notification: .announcement, argument: spelled)
+                    }
+                    //putting the accessibility action I removed the spelling action (swipe down, so I've done it again in case of needing it, even if it's faster
                     
-                   
                 }
             }
             .navigationTitle("Items")

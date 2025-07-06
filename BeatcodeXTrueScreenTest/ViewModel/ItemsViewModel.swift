@@ -8,7 +8,7 @@
 import Foundation
 
 class ItemsViewModel: ObservableObject {
-    @Published var items: [Item]//published var to update the favourite status ion both views
+    @Published var items: [Item]//published var to update the favourite status in both views
     
     init() {
         self.items = [
@@ -21,5 +21,8 @@ class ItemsViewModel: ObservableObject {
             Item(itemName: "Item 7")
         ]
     }
-    //list of 7 elements. 7 because is the maximum number of everything (cit.)
+    /*
+     List of 7 elements. 7 Because it is the maximum number of everything (cit.)
+     I could have used something that simply generates the items by giving it a range, but I prefer it this way in case I need to make further modifications to the Item type.
+     */
 }
