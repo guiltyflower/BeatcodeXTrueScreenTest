@@ -36,7 +36,10 @@ struct ContentView: View {
                         }
                     }
                     .accessibilityElement(children: .combine)
-                    .accessibilityHint("An item of the list. Double tap to access the details page")
+                    
+                    .accessibilityHint(item.isFavorite ?
+                                       "This is a favorite item. Double tap to access the details page"
+                                       : "Double tap to access the details page")
                     .accessibilityRemoveTraits(.isButton)
                     .accessibilityAction(named: Text(item.isFavorite
                                                      ? "Remove from favorites"
@@ -45,8 +48,8 @@ struct ContentView: View {
                         item.isFavorite.toggle()
                         let message = item.isFavorite
                         ? "\(item.itemName) added to favorites"
-                                : "\(item.itemName) Removed from favorites"
-                            UIAccessibility.post(notification: .announcement, argument: message)
+                        : "\(item.itemName) Removed from favorites"
+                        UIAccessibility.post(notification: .announcement, argument: message)
                     }
                     .accessibilityAction(named: Text("Spell item name")) {
                         let spelled = item.itemName.map { String($0) }.joined(separator: " ")
