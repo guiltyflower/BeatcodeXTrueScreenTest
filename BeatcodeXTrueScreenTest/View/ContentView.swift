@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct ContentView: View {
     @StateObject private var viewModel = ItemsViewModel()
@@ -21,8 +22,6 @@ struct ContentView: View {
                         HStack {
                             
                             Text(item.itemName)
-                                .accessibilityLabel(item.itemName)
-                                .accessibilityRemoveTraits(.isButton)
                             Spacer()
                             
                             Button {
@@ -33,21 +32,22 @@ struct ContentView: View {
                             }
                             .buttonStyle(PlainButtonStyle())
                             //I use this modifier to remove the click effect on the whole list item
-                          
+                            
                         }
-                        .accessibilityElement(children: .combine)
-                        .accessibilityRemoveTraits(.isButton)
-                        .accessibilityAdjustableAction { direction in
-                            switch direction {
-                            case .increment:
-                                item.isFavorite.toggle()
-                            default:
-                                print("not handled")
-                            }
-                        }
-                        .accessibilityHint("Double tap for the details, scroll up with one finger to add to favorite")
                     }
-                    
+                    .accessibilityElement(children: .combine)
+                    .accessibilityHint("Double tap for the details")
+                    .accessibilityAction(named: Text(item.isFavorite
+                                                     ? "Remove from favorites"
+                                                     : "Add to favorites")
+                    ) {
+                        item.isFavorite.toggle()
+                    }
+                    .accessibilityAction(named: Text("Spell item name")) {
+                        let spelled = item.itemName.map { String($0) }.joined(separator: " ")
+                        UIAccessibility.post(notification: .announcement, argument: spelled)
+                    }
+                    //putting the accessibility action I removed the spelling action (swipe down, so I've done it again in case of needing it, even if it's faster
                     
                 }
             }
