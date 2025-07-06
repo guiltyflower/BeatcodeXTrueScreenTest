@@ -42,6 +42,10 @@ struct ContentView: View {
                                                      : "Add to favorites")
                     ) {
                         item.isFavorite.toggle()
+                        let message = item.isFavorite
+                        ? "\(item.itemName) added to favorites"
+                                : "\(item.itemName) Removed from favorites"
+                            UIAccessibility.post(notification: .announcement, argument: message)
                     }
                     .accessibilityAction(named: Text("Spell item name")) {
                         let spelled = item.itemName.map { String($0) }.joined(separator: " ")
