@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var viewModel = ItemsViewModel()
-
+    
     var body: some View {
         NavigationView {
             List {
@@ -22,7 +22,7 @@ struct ContentView: View {
                             
                             Text(item.itemName)
                                 .accessibilityLabel(item.itemName)
-                                .accessibilityHint("Double tap to see description view")
+                                .accessibilityRemoveTraits(.isButton)
                             Spacer()
                             
                             Button {
@@ -30,16 +30,25 @@ struct ContentView: View {
                             } label: {
                                 Image(systemName: item.isFavorite ? "heart.fill" : "heart")
                                     .foregroundColor(item.isFavorite ? .red : .gray)
-                                    .accessibilityHint(item.isFavorite ? "Double tap to remove from favourite" : "Double tap to add to favourite")
                             }
                             .buttonStyle(PlainButtonStyle())
                             //I use this modifier to remove the click effect on the whole list item
-                            .accessibilityElement(children: .contain)
-                            
+                          
                         }
+                        .accessibilityElement(children: .combine)
+                        .accessibilityRemoveTraits(.isButton)
+                        .accessibilityAdjustableAction { direction in
+                            switch direction {
+                            case .increment:
+                                item.isFavorite.toggle()
+                            default:
+                                print("not handled")
+                            }
+                        }
+                        .accessibilityHint("Double tap for the details, scroll up with one finger to add to favorite")
                     }
                     
-                   
+                    
                 }
             }
             .navigationTitle("Items")
