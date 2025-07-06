@@ -21,7 +21,8 @@ struct ContentView: View {
                         HStack {
                             
                             Text(item.itemName)
-                            
+                                .accessibilityLabel(item.itemName)
+                                .accessibilityHint("Double tap to see description view")
                             Spacer()
                             
                             Button {
@@ -29,9 +30,11 @@ struct ContentView: View {
                             } label: {
                                 Image(systemName: item.isFavorite ? "heart.fill" : "heart")
                                     .foregroundColor(item.isFavorite ? .red : .gray)
+                                    .accessibilityHint(item.isFavorite ? "Double tap to remove from favourite" : "Double tap to add to favourite")
                             }
                             .buttonStyle(PlainButtonStyle())
                             //I use this modifier to remove the click effect on the whole list item
+                            .accessibilityElement(children: .contain)
                             
                         }
                     }
