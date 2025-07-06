@@ -10,9 +10,16 @@ import SwiftUI
 struct ItemDetailView: View {
     @Binding var item: Item
     var body: some View {
-        VStack{
+        VStack(spacing: 40){
+            
             Text(item.itemName)
+                .textCase(.uppercase)
+                .font(.title)
+                .fontWeight(.bold)
                 .accessibilityLabel(item.itemName)
+            
+            Text("This is the description page for \(item.itemName)")
+          
             Button {
                 item.isFavorite.toggle()
             } label: {
@@ -22,7 +29,14 @@ struct ItemDetailView: View {
                     .foregroundColor(item.isFavorite ? .red : .gray)
             }
             
+     
+           
         }
+        .frame(maxWidth: .infinity,maxHeight: .infinity, alignment: .top)
+        .padding(.top, 40)
+        .navigationTitle("Details")
+        .navigationBarTitleDisplayMode(.inline)
+     
     }
 }
 
