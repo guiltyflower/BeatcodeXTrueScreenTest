@@ -36,7 +36,8 @@ struct ContentView: View {
                         }
                     }
                     .accessibilityElement(children: .combine)
-                    .accessibilityHint("Double tap for the details")
+                    .accessibilityHint("An item of the list. Double tap to access the details page")
+                    .accessibilityRemoveTraits(.isButton)
                     .accessibilityAction(named: Text(item.isFavorite
                                                      ? "Remove from favorites"
                                                      : "Add to favorites")
