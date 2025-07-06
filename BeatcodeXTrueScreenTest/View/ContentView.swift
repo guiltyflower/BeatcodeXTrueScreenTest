@@ -55,7 +55,7 @@ struct ContentView: View {
                     
                 }
             }
-            .navigationTitle("Items")
+            .navigationTitle("Item List")
         }
     }
 }
