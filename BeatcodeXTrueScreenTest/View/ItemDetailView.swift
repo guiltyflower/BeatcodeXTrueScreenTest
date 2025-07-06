@@ -14,6 +14,8 @@ struct ItemDetailView: View {
             VStack(spacing: 40) {
                 //eventual other item things (image ecc ecc)
                 Text("This is the description page for \(item.itemName)")
+                    .accessibilityLabel("item description")
+                    .accessibilityHint("This is the description page for \(item.itemName)")
                 Spacer()
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
@@ -36,9 +38,12 @@ struct ItemDetailView: View {
                     )
             }
             .accessibilityRemoveTraits(.isButton)
-            .accessibilityHint(item.isFavorite ?
-                               "Favorite icon. This is a favorite item. Double tap to remove from favorites"
-                               : "Favorite icon, tap to add to favorites")
+            .accessibilityLabel(item.isFavorite
+                                ? "Remove from favorite"
+                                : "Add to favorite")
+            .accessibilityHint(item.isFavorite
+                                ? "This is a favorite item, double tap to remove it from favorites"
+                                : "Double tap to add it to favorites")
             .padding(.top, 16)
             .padding(.trailing, 16)
         }
