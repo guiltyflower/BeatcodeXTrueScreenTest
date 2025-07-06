@@ -12,12 +12,6 @@ struct ItemDetailView: View {
     var body: some View {
         VStack(spacing: 40){
             
-            Text(item.itemName)
-                .textCase(.uppercase)
-                .font(.title)
-                .fontWeight(.bold)
-                .accessibilityLabel(item.itemName)
-            
             Text("This is the description page for \(item.itemName)")
           
             Button {
@@ -34,7 +28,7 @@ struct ItemDetailView: View {
         }
         .frame(maxWidth: .infinity,maxHeight: .infinity, alignment: .top)
         .padding(.top, 40)
-        .navigationTitle("Details")
+        .navigationTitle(item.itemName.uppercased())
         .navigationBarTitleDisplayMode(.inline)
      
     }
