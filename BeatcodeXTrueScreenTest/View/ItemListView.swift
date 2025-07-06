@@ -8,7 +8,7 @@
 import SwiftUI
 import UIKit
 
-struct ContentView: View {
+struct ItemListView: View {
     @StateObject private var viewModel = ItemsViewModel()
     
     var body: some View {
@@ -65,5 +65,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ItemListView()
 }
